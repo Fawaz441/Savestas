@@ -16,7 +16,7 @@ SECRET_KEY = 'n!fu1u#oz9=5dt#u-j)fn)c+mvte%z-t=*(+c5m&mbjutt*=(i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['fawestas.herokuapp.com']
 
 
 # Application definition
