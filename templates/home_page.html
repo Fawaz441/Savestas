@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fawaz Abdulsalam</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background:rgb(59, 59, 59);">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="background:rgb(90, 86, 86);">
+          <li class="breadcrumb-item active" aria-current="page" style='display:block;margin:auto;'>
+            <a href="{% url 'admin:auth_user_changelist' %}">Go to Admin Page </a></li>
+        </ol>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-primary" role="alert">
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      <!-- form here  -->
+          <div class="container" style="max-width:400px !important;">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-6">
+            {{form.username}}
+          </div>
+          <div class="col-6">
+           {{form.first_name}}
+          </div>
+          <div class="col-6 mt-2">
+           {{form.email}}
+          </div>
+          <div class="col-6 mt-2">
+           {{form.password}}
+          </div>
+          <div class="col-6 mt-2">
+           {{form.confirm_password}}
+          </div>
+          <div class='col-12  mt-2'>
+            <input type="submit" value="CREATE USER" style="width:100%;background:rgb(90, 86, 86);" class="btn text-white">
+          </div>
+        </div>
+    </form>
+    <br>
+</div>
+      
+      <br>
+      <br>
+      <br>
+</body>
+<style>
+    a{color:#fff !important;}
+    a:hover{color:#fff !important;text-decoration:none;}
+</style>
+</html>

@@ -1,0 +1,147 @@
+{% extends 'admin/change_list.html' %}
+{% load humanize %}
+{% block content_title %}
+<h1>User Metrics</h1>
+{% endblock content_title %}
+
+{% block result_list %}
+<div class="results">
+    <table>
+        
+        <thead>
+            <tr>
+                <th>
+                    <div class="text">
+                        <a href="#">First Name</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">Last Name</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">Username</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">Email</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">
+                            <strong>Date Joined</strong>
+                        </a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">
+                            <strong>Is Active</strong>
+                        </a>
+                    </div>
+                </th>
+                <th>
+                    <div class="text">
+                        <a href="#">
+                            <strong>Actions</strong>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for row in summary %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td> {{ row.first_name }} </td>
+                <td> {{ row.last_name }} </td>
+                <td> {{ row.username}} </td>
+                <td>{{row.email}}</td>
+                <td>
+                    <strong>
+                        {{ row.date_joined }}
+                    </strong>
+                </td>
+                <td>{{row.is_active}}</td>
+                <td>
+                    {% if not row.is_active %}
+                    <a href="{% url 'activate_user' row.username %}" class="activate">Activate</a>
+                    {% else %}
+                    <a href="{% url 'deactivate_user' row.username %}" class="deactivate">Deactivate</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Users in the past week</td>
+                <td><b>
+                    {{past_week_users_count}}
+                </b></td>
+                <td>
+                    {% for user in past_week_users %}
+                    {{user}}, 
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>Users in the past Month</td>
+                <td><b>
+                    {{past_month_users_count}}
+                </b></td>
+                <td>
+                    {% for user in past_month_users %}
+                    {{user}}, 
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>
+<br>
+<div style="display:flex;align-items:center;justify-content:flex-end;">
+<a href="{% url 'email_form' %}" style="padding:7px 1rem;background:rgb(9, 137, 160);color:#fff;">Send Email</a>
+</div>
+<br>
+<br>
+<div class="results">
+    <h2>Users</h2>
+    <br>
+    <br>
+    <br>
+    <div class="container__">
+    
+    <div class="month" style="height:{{past_month_users_count}}rem;">{{past_month_users_count}} past month</div>
+    
+    <div class="week" style="height:{{past_week_users_count}}rem;">{{past_week_users_count}} past week</div>
+</div>
+</div>
+<style>
+.month{
+    width:40px;
+    background:salmon;
+    color:rgb(3, 72, 161);
+    text-align:center;
+    margin-right:1rem;
+}
+.week{
+    width:40px;
+    background:rgb(41, 233, 191);
+    color:rgb(18, 116, 146);
+    text-align:center;
+    padding:5px 0;
+}
+
+.container__{
+    display:flex;
+}
+
+.activate{padding:7px 1rem;background:rgb(15, 147, 165);color:#fff !important;border-radius: 5px;}
+.deactivate{padding:7px 1rem;background:red;color:#fff !important;border-radius:5px;}
+.activate:hover,.deactivate:hover{color:#fff;}
+</style>
+{% endblock result_list %}

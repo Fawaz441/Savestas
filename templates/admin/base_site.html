@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Fawaz{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Fawaz</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+<style>
+    #header{background:rgb(228, 20, 48);}
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {background:rgb(228, 20, 48)}
+    .button:hover, input[type=submit]:hover, input[type=button]:hover, a.button:hover {background:salmon;}
+</style>
+{% endblock %}
